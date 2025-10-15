@@ -1,0 +1,24 @@
+# 1) Clone your repo and enter it
+git clone https://github.com/<you>/<repo>.git
+cd <repo>
+
+# 2) Create & activate a virtualenv
+python3 -m venv .venv
+# macOS/Linux:
+source .venv/bin/activate
+
+# 3) Install dependencies
+pip install --upgrade pip
+pip install -r requirements.txt  # or: pip install requests beautifulsoup4 python-dotenv
+
+# 4) Scrape a public channel into SQLite
+python telegram_web_scraper_cli.py scrape --channel somechannel --db data.db
+
+# 5) (Optional) Scrape a public discussion group to map comments
+python telegram_web_scraper_cli.py scrape --channel somechannel --discussion somegroup --db data.db
+
+# 6) Search (CLI)
+python telegram_web_scraper_cli.py search --db data.db --query '"exact phrase" OR keyword' --limit 50
+
+# 7) Export results
+python telegram_web_scraper_cli.py export --db data.db --query drone --kind post --format csv --out results.csv
